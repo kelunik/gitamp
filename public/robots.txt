@@ -1,5 +1,0 @@
-# Be sure to specifiy if certain directories should not be followed
-#
-# User-agent: *
-# Disallow: /hidden/path
-# Disallow: /second/hidden/path

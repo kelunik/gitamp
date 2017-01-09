@@ -7,8 +7,8 @@ use Amp\Redis\Client;
 use Amp\Redis\RedisException;
 use function Amp\resolve;
 
-class RedisCounter implements Counter {
-
+class RedisCounter implements Counter
+{
     private $redis;
 
     public function __construct(Client $redis) {
@@ -16,6 +16,10 @@ class RedisCounter implements Counter {
     }
 
     public function increment(string $key): Promise {
+        if ($key === 'something') {
+            echo 'hit';
+        }
+
         return resolve(function() use ($key) {
             try {
                 return yield $this->redis->incr($key);
