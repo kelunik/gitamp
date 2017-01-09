@@ -16,10 +16,6 @@ class RedisCounter implements Counter
     }
 
     public function increment(string $key): Promise {
-        if ($key === 'something') {
-            echo 'hit';
-        }
-
         return resolve(function() use ($key) {
             try {
                 return yield $this->redis->incr($key);
