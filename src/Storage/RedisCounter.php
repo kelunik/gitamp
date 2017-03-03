@@ -5,7 +5,6 @@ namespace ekinhbayar\GitAmp\Storage;
 use Amp\Promise;
 use Amp\Redis\Client;
 use Amp\Redis\RedisException;
-use function Amp\resolve;
 
 class RedisCounter implements Counter
 {
@@ -16,7 +15,7 @@ class RedisCounter implements Counter
     }
 
     public function increment(string $key): Promise {
-        return resolve(function() use ($key) {
+        return \Amp\resolve(function() use ($key) {
             try {
                 return yield $this->redis->incr($key);
             } catch (RedisException $e) {
@@ -26,7 +25,7 @@ class RedisCounter implements Counter
     }
 
     public function decrement(string $key): Promise {
-        return resolve(function() use ($key) {
+        return \Amp\resolve(function() use ($key) {
             try {
                 return yield $this->redis->decr($key);
             } catch (RedisException $e) {
@@ -36,7 +35,7 @@ class RedisCounter implements Counter
     }
 
     public function get(string $key): Promise {
-        return resolve(function() use ($key) {
+        return \Amp\resolve(function() use ($key) {
             try {
                 $result = yield $this->redis->get($key);
 
@@ -48,7 +47,7 @@ class RedisCounter implements Counter
     }
 
     public function set(string $key, int $val): Promise {
-        return resolve(function() use ($key, $val) {
+        return \Amp\resolve(function() use ($key, $val) {
             try {
                 return yield $this->redis->set($key, $val);
             } catch (RedisException $e) {
